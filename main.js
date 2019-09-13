@@ -218,7 +218,7 @@ outEl.innerHTML += "<h1>Purchasing Agents</h1>";
     from each business and store it in a new array
 */
 const agents = businesses.map(business => {
-    return  {
+    return {
         firstName: business.purchasingAgent.nameFirst,
         lastName: business.purchasingAgent.nameLast,
         company: business.companyName,
@@ -230,22 +230,22 @@ const agents = businesses.map(business => {
 console.table(agents)
 
 agents.forEach(agent => {
-  outEl.innerHTML += `<h2>${agent.firstName} ${agent.lastName}</h2>
+    outEl.innerHTML += `<h2>${agent.firstName} ${agent.lastName}</h2>
   <p>${agent.company} ${agent.number}</p>`;
-  outEl.innerHTML += "<hr/>";
+    outEl.innerHTML += "<hr/>";
 });
 
 
 /* FIND () METHODS */
 
 document.querySelector("#companySearch").addEventListener("keypress", keyPressEvent => {
-        if (keyPressEvent.charCode === 13) {
-            /* WHEN  USER PRESSES ENTER, FIND MATCHING BUSINESS */
-            const foundBusiness = businesses.find( business =>
-                    business.companyName.includes(keyPressEvent.target.value)
-            );
+    if (keyPressEvent.charCode === 13) {
+        /* WHEN  USER PRESSES ENTER, FIND MATCHING BUSINESS */
+        const foundBusiness = businesses.find(business =>
+            business.companyName.includes(keyPressEvent.target.value)
+        );
 
-            outEl.innerHTML = `
+        outEl.innerHTML = `
                 <h2>
                 ${foundBusiness.companyName}
                 </h2>
@@ -259,8 +259,8 @@ document.querySelector("#companySearch").addEventListener("keypress", keyPressEv
                 ${foundBusiness.addressZipCode}
                 </section>
             `;
-        }
-    });
+    }
+});
 
 /* REDUCE () METHOD */
 
@@ -288,8 +288,66 @@ businesses.forEach(business => {
         </section>
     `;
     outEl.innerHTML += "<hr/>";
-}); 
+});
+
+const monthlyRainfall = [23, 13, 27, 20, 20, 31, 33, 26, 19, 12, 14, 12, 10]
+
+const totalRainfall = monthlyRainfall.reduce(
+    (currentRain, nextRain) => currentRain += nextRain, 0
+)
+
+console.log(totalRainfall)
+
+
+const words = ["The ", "quick ", "brown ", "fox ", "jumped ", "over ", "the ", "lazy ", "dog"]
+
+const sentence = words.reduce(
+    (currentWord, nextWord) => currentWord += nextWord
+)
+
+console.log(sentence)
 
 
 
 
+/* Practice: Big Spenders */
+
+
+
+// Array to contain all the big spenders
+
+const bigSpenders = businesses.filter(business => {
+
+    let element = false
+    business.orders.forEach(sale => {
+
+
+        if (sale >= 9000) {
+            element = true
+        }
+
+    })
+
+    return element
+})
+console.log("very successfull companies", bigSpenders)
+
+let spenderDom = document.querySelector("#bigSpender")
+spenderDom.innerHTML = "<h1>Very successfull Companies</h1>"
+
+const spendHtml = (businesses) => {
+    businesses.forEach(businesses => {
+        spenderDom.innerHTML += `
+      <h2>${businesses.companyName}</h2>
+    <section>
+      ${businesses.addressFullStreet}
+    </section>
+    <section>
+      ${businesses.addressCity} ${businesses.addressStateCode}, ${businesses.addressZipCode}.
+     </section>
+      `
+        spenderDom.innerHTML += "<hr/>"
+    })
+}
+
+spendHtml(bigSpenders)
