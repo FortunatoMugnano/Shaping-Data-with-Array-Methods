@@ -299,10 +299,10 @@ const totalRainfall = monthlyRainfall.reduce(
 console.log(totalRainfall)
 
 
-const words = ["The ", "quick ", "brown ", "fox ", "jumped ", "over ", "the ", "lazy ", "dog"]
+const words = ["The", "quick", "brown", "fox", "jumped", "over", "the", "lazy", "dog"]
 
 const sentence = words.reduce(
-    (currentWord, nextWord) => currentWord += nextWord
+    (currentWord, nextWord) => currentWord += ( ' ' + nextWord )
 )
 
 console.log(sentence)
